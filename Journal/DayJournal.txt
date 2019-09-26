@@ -1,2 +1,6 @@
-9/24/19
+9/24/19 - as team
 Made the github repo and got each team member set up with GitKraken. Started looking for assets. Found an online game that looks similar to what we want to make. Found a video that should give guidance on making a top down shooter if we run into issues. 
+
+9/26/19 - Matthew
+Made prefabs of enemy, player, and projectiles. Added background and set the game size to 1024x768.
+Built Level 1 borders, can probably use these same borders for each level.
