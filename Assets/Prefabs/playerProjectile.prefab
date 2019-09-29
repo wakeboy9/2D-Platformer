@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4567655899245266501}
   - component: {fileID: 4567655899245266502}
-  - component: {fileID: 3445225249402816394}
-  - component: {fileID: 8034067121702336734}
+  - component: {fileID: 8440976397439531837}
+  - component: {fileID: 2587783844191822564}
+  - component: {fileID: -94733074798648665}
   m_Layer: 0
   m_Name: playerProjectile
   m_TagString: Untagged
@@ -82,8 +83,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &3445225249402816394
-CapsuleCollider2D:
+--- !u!114 &8440976397439531837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4567655899245266503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd513dab6c2f4f709e4cd7dfee44742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &2587783844191822564
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,13 +105,28 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.13, y: 0.37}
-  m_Direction: 0
---- !u!50 &8034067121702336734
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.13, y: 0.37}
+    newSize: {x: 0.13, y: 0.37}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.065, y: 0.185}
+      - {x: -0.065, y: -0.155}
+      - {x: -0.044999998, y: -0.175}
+      - {x: 0.015, y: -0.175}
+      - {x: 0.065, y: -0.155}
+      - {x: 0.065, y: 0.185}
+--- !u!50 &-94733074798648665
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -106,14 +134,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4567655899245266503}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
