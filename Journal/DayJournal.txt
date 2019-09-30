@@ -4,3 +4,6 @@ Made the github repo and got each team member set up with GitKraken. Started loo
 9/26/19 - Matthew
 Made prefabs of enemy, player, and projectiles. Added background and set the game size to 1024x768.
 Built Level 1 borders, can probably use these same borders for each level.
+
+9/30/19 - Matthew
+Got the enemy ship script properly tracking and shooting at the player. Made some small changes to the player controller and projectile scripts to get rid of some unneccesary copied code from previous projects.

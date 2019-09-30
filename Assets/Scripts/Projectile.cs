@@ -10,30 +10,30 @@ public class Projectile : MonoBehaviour
 
     public float speed = 2;
     public float lifeTime = 10;
-    public Vector2 direction = new Vector2(0, 1);
 
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(KillAfterSeconds(lifeTime));
-        direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        StartCoroutine(KillAfterSeconds());
+        
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.position * speed;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
+        
     }
 
 
     /// Destroys the projectile after some seconds
-    IEnumerator KillAfterSeconds(float seconds)
+    IEnumerator KillAfterSeconds()
     {
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }
 
