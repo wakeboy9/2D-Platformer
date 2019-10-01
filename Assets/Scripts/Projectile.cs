@@ -8,8 +8,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float speed = 2;
+    public float speed;
     public float lifeTime = 10;
+    public bool invulnerable;
 
     private Rigidbody2D rb;
 
@@ -18,15 +19,13 @@ public class Projectile : MonoBehaviour
     {
         StartCoroutine(KillAfterSeconds());
         
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.position * speed;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += transform.up * speed * Time.deltaTime;
     }
 
 
@@ -37,6 +36,20 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Wall") {
+            Destroy(gameObject);
+        }   
+        if(other.CompareTag("PlayerProjectile") && !gameObject.CompareTag("PlayerProjectile")) {
+            Destroy(other);
+            if (!invulnerable)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 }
 
 

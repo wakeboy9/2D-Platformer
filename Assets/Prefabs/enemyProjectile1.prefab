@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5549891702345557142}
   - component: {fileID: 2591404488579063377}
   - component: {fileID: 5335167320823190134}
-  - component: {fileID: 5620860611385509068}
+  - component: {fileID: -2066599330527975811}
   m_Layer: 0
   m_Name: enemyProjectile1
-  m_TagString: Untagged
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 601323433
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ce56713c2c42b4222952f8d9b9aee409, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -95,8 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd513dab6c2f4f709e4cd7dfee44742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   lifeTime: 10
+  invulnerable: 0
 --- !u!60 &5335167320823190134
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ PolygonCollider2D:
       - {x: -0.185, y: -0.17999999}
       - {x: 0.185, y: -0.17999999}
       - {x: 0.185, y: 0.17999999}
---- !u!50 &5620860611385509068
+--- !u!50 &-2066599330527975811
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -134,14 +135,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5549891702345557143}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

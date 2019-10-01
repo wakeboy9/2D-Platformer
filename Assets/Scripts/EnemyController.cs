@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
         invulnerable = false;
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        transform.up = (target.position - transform.position);
         StartCoroutine(shoot());
     }
 
@@ -30,15 +31,16 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         if(health <= 0) {
+            dead = true;
             Destroy(gameObject);
         }
 
-        transform.up = -(target.position - transform.position);
+        transform.up = (target.position - transform.position);
     }
 
     IEnumerator shoot() {
         while(!dead) {            
-            Instantiate(proj1, transform.position - (transform.up * 1.2f), Quaternion.identity);
+            Instantiate(proj1, transform.position + (transform.up * 1.1f), transform.rotation);
 
             yield return new WaitForSeconds(fireRate);
         }
