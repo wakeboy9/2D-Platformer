@@ -14,7 +14,6 @@ public class PlayerController: MonoBehaviour
 
     public Sprite hurt1;
     public Sprite hurt2;
-    public Sprite hurt3;
 
     private bool isFiring;
     private bool isHurting;
@@ -25,9 +24,9 @@ public class PlayerController: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 3;
+        sm = GetComponentInChildren<SpriteMask>();
 
-        sm = GetComponent<SpriteMask>();
+        health = 3;
     }
 
     // Update is called once per frame
@@ -106,7 +105,8 @@ public class PlayerController: MonoBehaviour
             return;
         }
 
-        switch(health) {
+        switch (health)
+        {
             case 2:
                 sm.sprite = hurt1;
                 break;

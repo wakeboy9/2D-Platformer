@@ -1037,21 +1037,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4334203430181919855, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
-        type: 3}
-      propertyPath: m_IsCustomRangeActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4334203430181919855, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
-        type: 3}
-      propertyPath: m_FrontSortingLayerID
-      value: 1232955357
-      objectReference: {fileID: 0}
-    - target: {fileID: -4334203430181919855, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
-        type: 3}
-      propertyPath: m_FrontSortingLayer
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 599354224780960613, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
         type: 3}
       propertyPath: m_Name
@@ -1115,7 +1100,22 @@ PrefabInstance:
     - target: {fileID: 2608914234115153796, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
         type: 3}
       propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4334203430181919855, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
+        type: 3}
+      propertyPath: m_IsCustomRangeActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4334203430181919855, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
+        type: 3}
+      propertyPath: m_FrontSortingLayerID
+      value: 1232955357
+      objectReference: {fileID: 0}
+    - target: {fileID: -4334203430181919855, guid: f6cc7bcfd83beb140ae9b984f3df4ee5,
+        type: 3}
+      propertyPath: m_FrontSortingLayer
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc7bcfd83beb140ae9b984f3df4ee5, type: 3}
