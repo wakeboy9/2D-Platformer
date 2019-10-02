@@ -11,6 +11,10 @@ public class PlayerController: MonoBehaviour
 
     public float fireRate;
 
+    public Sprite hurt1;
+    public Sprite hurt2;
+    public Sprite hurt3;
+
     private bool isFiring;
     private int health;
 
