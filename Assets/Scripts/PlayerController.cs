@@ -20,10 +20,14 @@ public class PlayerController: MonoBehaviour
     private bool isHurting;
     private int health;
 
+    private SpriteMask sm;
+
     // Start is called before the first frame update
     void Start()
     {
         health = 3;
+
+        sm = GetComponent<SpriteMask>();
     }
 
     // Update is called once per frame
@@ -83,6 +87,7 @@ public class PlayerController: MonoBehaviour
         }
     }
 
+    // Health and damage
     void Hurt()
     {
         if (isHurting)
@@ -90,16 +95,25 @@ public class PlayerController: MonoBehaviour
             return;
         }
 
+        StartCoroutine(HurtRoutine());
+
         isHurting = true;
         health--;
 
-        // Health
         if (health <= 0)
         {
             Destroy(gameObject);
+            return;
         }
 
-        StartCoroutine(HurtRoutine());
+        switch(health) {
+            case 2:
+                sm.sprite = hurt1;
+                break;
+            case 1:
+                sm.sprite = hurt2;
+                break;
+        }
     }
 
     IEnumerator HurtRoutine()

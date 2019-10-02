@@ -102,9 +102,9 @@ MonoBehaviour:
     type: 3}
   fireRate: 0.32
   hurtTimer: 1
-  hurt1: {fileID: 0}
-  hurt2: {fileID: 0}
-  hurt3: {fileID: 0}
+  hurt1: {fileID: 21300000, guid: cce00e30f85f84228a8e268d3cd998a1, type: 3}
+  hurt2: {fileID: 21300000, guid: 9b8e84c8d939b4e5698f678d3476b84b, type: 3}
+  hurt3: {fileID: 21300000, guid: 42d36367ed54b476d9e8b1501d56732f, type: 3}
 --- !u!58 &5849498870088221890
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -181,11 +181,11 @@ SpriteMask:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_MaskAlphaCutoff: 0.3
-  m_FrontSortingLayerID: 0
-  m_BackSortingLayerID: 0
-  m_FrontSortingLayer: 0
-  m_BackSortingLayer: 0
+  m_MaskAlphaCutoff: 0.9
+  m_FrontSortingLayerID: 601323433
+  m_BackSortingLayerID: 601323433
+  m_FrontSortingLayer: 3
+  m_BackSortingLayer: 3
   m_FrontSortingOrder: 0
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
