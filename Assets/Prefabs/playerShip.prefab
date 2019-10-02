@@ -101,6 +101,10 @@ MonoBehaviour:
   projectile: {fileID: 4567655899245266503, guid: bb07fc17ff6359542b4e7fb1b664097d,
     type: 3}
   fireRate: 0.32
+  hurtTimer: 1
+  hurt1: {fileID: 0}
+  hurt2: {fileID: 0}
+  hurt3: {fileID: 0}
 --- !u!58 &5849498870088221890
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -177,7 +181,7 @@ SpriteMask:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_MaskAlphaCutoff: 0.2
+  m_MaskAlphaCutoff: 0.3
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
