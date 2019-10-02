@@ -12,11 +12,13 @@ public class Projectile : MonoBehaviour
     public float lifeTime = 10;
     public bool invulnerable;
 
-    private Rigidbody2D rb;
+    private Collider2D col;
 
     // Start is called before the first frame update
     void Start()
     {
+        col = GetComponent<Collider2D>();
+
         StartCoroutine(KillAfterSeconds());
         
     }
@@ -44,13 +46,21 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
         
-        if(other.collider.CompareTag("PlayerProjectile") && !gameObject.CompareTag("PlayerProjectile")) {
+        else if(other.collider.CompareTag("PlayerProjectile") && !gameObject.CompareTag("PlayerProjectile")) 
+        {
             Destroy(other.gameObject);
 
-            if (!invulnerable)
-            {
-                Destroy(gameObject);
-            }
+            if (!invulnerable) {Destroy(gameObject);}
+        }
+
+        else if(!other.collider.CompareTag("Player") && !gameObject.CompareTag("PlayerProjectile")) 
+        {
+            Physics2D.IgnoreCollision(other.collider, col);
+        }
+
+        else if(other.collider.CompareTag("EnemyProjectile") && gameObject.CompareTag("EnemyProjectile")) 
+        {
+            Physics2D.IgnoreCollision(other.collider, col);
         }
     }
 }

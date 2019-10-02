@@ -27,9 +27,8 @@ public class EnemyController : MonoBehaviour
     private Transform target;
 
     // How to move the main enemy
-    private float velocity = 2f;
-    private Vector2 direction;
-    private Vector2 movementPerSecond;
+    private float speed = 2f;
+    private Vector3 direction;
 
     // Stay this far away from player ship when following
     private int minDistance = 2;
@@ -92,7 +91,6 @@ public class EnemyController : MonoBehaviour
 
             yield return new WaitForSeconds(fireRate);
         }
-
     }
 
     // Take damage after hit with player projectile, bounce on hitting wall
@@ -147,16 +145,14 @@ public class EnemyController : MonoBehaviour
     // make the enemy bounce off the wall by calculating new movement vector
     void ChangeDirection()
     {
-        //create a random direction vector with the magnitude of 1, later multiply it with the velocity of the enemy
-        direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
-        movementPerSecond = direction * velocity;
+        //create a random direction vector with the magnitude of 1, later multiply it with the speed of the enemy
+        direction = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
     }
 
     // Move in direction chosen in ChangeDirection
     void Move()
     {
-        transform.position = new Vector2(transform.position.x + (movementPerSecond.x * Time.deltaTime),
-        transform.position.y + (movementPerSecond.y * Time.deltaTime));
+        transform.position += (direction * speed * Time.deltaTime);
     }
 
     // Move towards the player
@@ -164,7 +160,7 @@ public class EnemyController : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, target.position) >= minDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, velocity * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
 
     }
