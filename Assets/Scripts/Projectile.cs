@@ -36,14 +36,17 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
-    void OnTriggerEnter2D(Collider2D other)
+
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.tag == "Wall") {
+        if (other.collider.CompareTag("Wall"))
+        {
             Destroy(gameObject);
-        }   
-        if(other.CompareTag("PlayerProjectile") && !gameObject.CompareTag("PlayerProjectile")) {
-            Destroy(other);
+        }
+        
+        if(other.collider.CompareTag("PlayerProjectile") && !gameObject.CompareTag("PlayerProjectile")) {
+            Destroy(other.gameObject);
+
             if (!invulnerable)
             {
                 Destroy(gameObject);
