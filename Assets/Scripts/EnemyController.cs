@@ -16,15 +16,17 @@ public class EnemyController : MonoBehaviour
 
     private int health;
     private bool dead = false;
+    private bool isHurting;
     private bool invulnerable;
+    private float hurtTimer = 0.5f;
 
     private Transform target;
 
-    private float latestDirectionChangeTime;
-    private readonly float directionChangeTime = 3f;
     private float velocity = 2f;
     private Vector2 direction;
     private Vector2 movementPerSecond;
+
+    private int minDistance = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +42,13 @@ public class EnemyController : MonoBehaviour
 
         sceneName = currentScene.name;
 
+        // in level 2, enemy simply bounces around
         if (sceneName == "Level2")
         {
-            latestDirectionChangeTime = 0f;
-            calcuateNewMovementVector();
+            ChangeDirection();
         }
 
+        // in level 3, enemy follows the player
         else if (sceneName == "Level3")
         {
 
@@ -57,7 +60,8 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
 
-        if(health <= 0) {
+        if (health <= 0)
+        {
             dead = true;
             Destroy(gameObject);
         }
@@ -66,26 +70,34 @@ public class EnemyController : MonoBehaviour
 
         if (sceneName == "Level2")
         {
-            transform.position = new Vector2(transform.position.x + (movementPerSecond.x * Time.deltaTime),
-            transform.position.y + (movementPerSecond.y * Time.deltaTime));
+            Move();
+        }
+
+        else if (sceneName == "Level3")
+        {
+            Chase();
         }
     }
 
 
-    IEnumerator shoot() {
-        while(!dead) {            
+    IEnumerator shoot()
+    {
+        while (!dead)
+        {
             Instantiate(proj1, transform.position + (transform.up * 1.1f), transform.rotation);
 
             yield return new WaitForSeconds(fireRate);
         }
-        
+
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "PlayerProjectile") {
-            if(!invulnerable) {
-                health--;
+        if (other.gameObject.tag == "PlayerProjectile")
+        {
+            if (!invulnerable)
+            {
+                Hurt();
             }
             Destroy(other.gameObject);
         }
@@ -94,17 +106,64 @@ public class EnemyController : MonoBehaviour
         // when the enemy hits the wall, bounce off of it
         if (other.gameObject.tag == "Wall")
         {
-            calcuateNewMovementVector();
+            ChangeDirection();
         }
     }
 
+    void Hurt()
+    {
+        if (isHurting)
+        {
+            return;
+        }
+
+        isHurting = true;
+        health--;
+
+        // Health
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+        StartCoroutine(HurtRoutine());
+    }
+
+    IEnumerator HurtRoutine()
+    {
+        float startTime = Time.time;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        while (startTime + hurtTimer > Time.time)
+        {
+            sr.color = Color.black;
+            yield return new WaitForSeconds(.1f);
+            sr.color = Color.white;
+            yield return new WaitForSeconds(.1f);
+        }
+        isHurting = false;
+    }
+
     // make the enemy bounce off the wall by calculating new movement vector
-    void calcuateNewMovementVector()
+    void ChangeDirection()
     {
         //create a random direction vector with the magnitude of 1, later multiply it with the velocity of the enemy
         direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
         movementPerSecond = direction * velocity;
     }
 
+    void Move()
+    {
+        transform.position = new Vector2(transform.position.x + (movementPerSecond.x * Time.deltaTime),
+        transform.position.y + (movementPerSecond.y * Time.deltaTime));
+    }
+
+    void Chase()
+    {
+        if (Vector3.Distance(transform.position, target.position) >= minDistance)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, velocity * Time.deltaTime);
+        }
+
+    }
 
 }
