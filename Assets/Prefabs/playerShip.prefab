@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!114 &3508917612099330947
 MonoBehaviour:
@@ -103,7 +103,6 @@ MonoBehaviour:
   hurtTimer: 1
   hurt1: {fileID: 21300000, guid: cce00e30f85f84228a8e268d3cd998a1, type: 3}
   hurt2: {fileID: 21300000, guid: 9b8e84c8d939b4e5698f678d3476b84b, type: 3}
-  hurt3: {fileID: 21300000, guid: 42d36367ed54b476d9e8b1501d56732f, type: 3}
 --- !u!58 &5849498870088221890
 CircleCollider2D:
   m_ObjectHideFlags: 0

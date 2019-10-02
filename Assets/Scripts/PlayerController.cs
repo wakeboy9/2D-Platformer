@@ -4,51 +4,67 @@ using UnityEngine;
 
 public class PlayerController: MonoBehaviour
 {
-
+    // How fast to move and rotate
     public float speed = 0.1f;
     public float rotationSpeed = 2;
+
+    // Projectile prefab
     public GameObject projectile;
 
+    // How often to fire in seconds
     public float fireRate;
+    
+    // Invulnerability time and health
     public float hurtTimer = 1;
+    private int health;
 
+    // Sprites for player ship damage
     public Sprite hurt1;
     public Sprite hurt2;
 
-    private bool isFiring;
-    private bool isHurting;
-    private int health;
-
+    // Child and child's sprite mask to show player ship damage
+    private GameObject damageChild;
     private SpriteMask sm;
+
+    // Current statuses for invulnerability and firing limit
+    private bool isHurting;
+    private bool isFiring;
+
+    // Set bounds of level so ship doesn't clip into or bounce on walls
+    private float maxX = 5.62f, minX = -5.6f;
+    private float maxY = 3.97f, minY = -3.98f;
 
     // Start is called before the first frame update
     void Start()
     {
-        sm = GetComponentInChildren<SpriteMask>();
-
         health = 3;
+
+        damageChild = new GameObject("Empty");
+        damageChild.AddComponent<SpriteMask>();
+        damageChild.transform.SetParent(transform);
+        damageChild.transform.localPosition = Vector3.zero; 
+
+        sm = damageChild.GetComponent<SpriteMask>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // Move
-        if (Input.GetKey (KeyCode.A))
-        {
-            transform.position += (Vector3.left * speed);
-
-        }
-        if (Input.GetKey (KeyCode.D))
+        if (Input.GetKey (KeyCode.D) && transform.position.x < maxX)
         {
             transform.position += (Vector3.right * speed);
         }
-
-        if (Input.GetKey (KeyCode.W))
+        if (Input.GetKey (KeyCode.A) && transform.position.x > minX)
+        {
+            transform.position += (Vector3.left * speed);
+        }
+        if (Input.GetKey (KeyCode.W) && transform.position.y < maxY)
         {
             transform.position += (Vector3.up * speed);
         }
 
-        if (Input.GetKey (KeyCode.S))
+        if (Input.GetKey (KeyCode.S) && transform.position.y > minY)
         {
             transform.position += (Vector3.down * speed);
         }
@@ -77,34 +93,29 @@ public class PlayerController: MonoBehaviour
         isFiring = false;
     }
 
+    // Take damage on hit by enemy projectile
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.CompareTag("EnemyProjectile"))
         {
-            Hurt();
             Destroy(other.gameObject);
+            Hurt();
         }
     }
 
     // Health and damage
     void Hurt()
     {
-        if (isHurting)
-        {
-            return;
-        }
+        if (isHurting) {return;}
 
         StartCoroutine(HurtRoutine());
 
         isHurting = true;
         health--;
 
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (health <= 0) {Destroy(gameObject);}
 
+        // Change ship sprite mask for damage
         switch (health)
         {
             case 2:
@@ -116,6 +127,7 @@ public class PlayerController: MonoBehaviour
         }
     }
 
+    // Blink red and white, stay invulnerable for hurtTimer seconds
     IEnumerator HurtRoutine()
     {
         float startTime = Time.time;
@@ -129,5 +141,4 @@ public class PlayerController: MonoBehaviour
         }
         isHurting = false;
     }
-
 }

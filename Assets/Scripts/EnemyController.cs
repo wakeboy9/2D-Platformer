@@ -9,37 +9,44 @@ public class EnemyController : MonoBehaviour
     private Scene currentScene;
     private string sceneName;
 
-    public GameObject proj1; // Undestroyable projectile
-    public GameObject proj2; // Destroyable projectile
+    // Projectiles, proj2 is invulnerable
+    public GameObject proj1; 
+    public GameObject proj2; 
 
-    public float fireRate; // How often to fire, in seconds
+    // How often to fire, in seconds
+    public float fireRate; 
 
+    // Variables for health
     private int health;
     private bool dead = false;
     private bool isHurting;
     private bool invulnerable;
     private float hurtTimer = 0.5f;
 
+    // Player ship's transform 
     private Transform target;
 
+    // How to move the main enemy
     private float velocity = 2f;
     private Vector2 direction;
     private Vector2 movementPerSecond;
 
+    // Stay this far away from player ship when following
     private int minDistance = 2;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = 5;
-        invulnerable = false;
-
-        currentScene = SceneManager.GetActiveScene();
-
+        // Find, aim, and start shooting at start firing
         target = GameObject.FindGameObjectWithTag("Player").transform;
         transform.up = (target.position - transform.position);
         StartCoroutine(shoot());
 
+        // Set health
+        health = 5;
+
+        // Get scene name to change main enemy activity
+        currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
         // in level 2, enemy simply bounces around
@@ -53,36 +60,33 @@ public class EnemyController : MonoBehaviour
         {
 
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (health <= 0)
-        {
-            dead = true;
-            Destroy(gameObject);
+        // Aim at player ship
+        if(target != null) {
+            transform.up = (target.position - transform.position);
         }
 
-        transform.up = (target.position - transform.position);
-
+        // Main enemy moves around on level 2,
         if (sceneName == "Level2")
         {
             Move();
         }
 
+        // Main enemy chases enemy on level 3,
         else if (sceneName == "Level3")
         {
             Chase();
         }
     }
 
-
+    // Fire projectile at enemy every fireRate seconds
     IEnumerator shoot()
     {
-        while (!dead)
+        while (!dead && target != null)
         {
             Instantiate(proj1, transform.position + (transform.up * 1.1f), transform.rotation);
 
@@ -91,6 +95,7 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    // Take damage after hit with player projectile, bounce on hitting wall
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "PlayerProjectile")
@@ -110,25 +115,21 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // Take damage
     void Hurt()
     {
-        if (isHurting)
-        {
-            return;
-        }
+        if (isHurting) {return;}
 
         isHurting = true;
         health--;
 
-        // Health
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        // Destroy game obj
+        if (health <= 0) {Destroy(gameObject);}
 
         StartCoroutine(HurtRoutine());
     }
 
+    // Blink black and white, stay invulnerable for hurtTimer seconds
     IEnumerator HurtRoutine()
     {
         float startTime = Time.time;
@@ -151,12 +152,14 @@ public class EnemyController : MonoBehaviour
         movementPerSecond = direction * velocity;
     }
 
+    // Move in direction chosen in ChangeDirection
     void Move()
     {
         transform.position = new Vector2(transform.position.x + (movementPerSecond.x * Time.deltaTime),
         transform.position.y + (movementPerSecond.y * Time.deltaTime));
     }
 
+    // Move towards the player
     void Chase()
     {
         if (Vector3.Distance(transform.position, target.position) >= minDistance)
