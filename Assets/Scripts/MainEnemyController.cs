@@ -26,7 +26,7 @@ public class MainEnemyController : Enemy
         sceneName = currentScene.name;
 
         // in level 2, enemy simply bounces around
-        if (sceneName == "Level2")
+        if (sceneName == "Level2" || sceneName == "Level6")
         {
             ChangeDirection();
         }
@@ -42,7 +42,7 @@ public class MainEnemyController : Enemy
         }
 
         // Main enemy moves around on level 2,
-        if (sceneName == "Level2")
+        if (sceneName == "Level2" || sceneName == "Level6")
         {
             Move();
         }
