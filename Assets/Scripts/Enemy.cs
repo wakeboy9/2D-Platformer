@@ -34,7 +34,7 @@ public abstract class Enemy : MonoBehaviour
 
     // Stay this far away from player ship when following
     [HideInInspector]
-    public int minDistance;
+    public float minDistance;
 
     public void Start() {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -93,6 +93,7 @@ public abstract class Enemy : MonoBehaviour
     // Move towards the player
     public void Chase()
     {
+        minDistance = 1.7f;
         if (Vector3.Distance(transform.position, target.position) >= minDistance)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);

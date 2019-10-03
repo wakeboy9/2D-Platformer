@@ -30,6 +30,7 @@ public class MainEnemyController : Enemy
         {
             ChangeDirection();
         }
+
     }
 
     // Update is called once per frame
@@ -44,6 +45,11 @@ public class MainEnemyController : Enemy
         if (sceneName == "Level2")
         {
             Move();
+        }
+
+        else if (sceneName == "Level3")
+        {
+            Chase();
         }
     }
 
