@@ -121,4 +121,4 @@ MonoBehaviour:
   speed: 0
   direction: {x: 0, y: 0, z: 0}
   minDistance: 0
-  rotationSpeed: 0
+  rotationSpeed: 1
