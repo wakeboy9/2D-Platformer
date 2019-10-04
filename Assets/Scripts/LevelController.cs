@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
-    public int PrevScene = SceneManager.GetActiveScene().buildIndex - 1;
-    public int NextScene = SceneManager.GetActiveScene().buildIndex + 1;
+
+    public static int PrevScene;
+    public static int NextScene;
 
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
+        PrevScene = SceneManager.GetActiveScene().buildIndex - 1;
+        NextScene = SceneManager.GetActiveScene().buildIndex + 1;
     }
-
 }
