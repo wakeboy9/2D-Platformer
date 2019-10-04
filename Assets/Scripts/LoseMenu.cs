@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class LoseMenu : MonoBehaviour
 {
+    public GameObject myLevelHandler;
+    public void Start()
+    {
+        myLevelHandler = GameObject.FindGameObjectWithTag("LevelHandler");
+    }
+
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //PlayerController.myActiveScene
+        SceneManager.LoadScene(myLevelHandler.PrevScene);
     }
 
     public void MainMenu()

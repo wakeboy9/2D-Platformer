@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController: MonoBehaviour
 {
+    //public static int myActiveScene;
     private AudioSource myAudioSource;
     public AudioClip[] audioClips;
     private int randomInt;
@@ -129,7 +130,9 @@ public class PlayerController: MonoBehaviour
 
         if (health <= 0) {
             Destroy(gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            //myActiveScene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene("Lose");
         }
 
         // Change ship sprite mask for damage
