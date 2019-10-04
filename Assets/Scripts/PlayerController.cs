@@ -45,6 +45,10 @@ public class PlayerController: MonoBehaviour
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
+        randomInt = Random.Range(0, audioClips.Length);
+        clip = audioClips[randomInt];
+        myAudioSource.PlayOneShot(clip);
+
         health = 3;
 
         damageChild = new GameObject("Empty");
@@ -58,13 +62,7 @@ public class PlayerController: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Move and play background music
-        if (Input.anyKeyDown)
-        {
-            randomInt = Random.Range(0, audioClips.Length);
-            clip = audioClips[randomInt];
-            myAudioSource.PlayOneShot(clip);
-        }
+        // Move
 
         if (Input.GetKey (KeyCode.D) && transform.position.x < maxX)
         {
