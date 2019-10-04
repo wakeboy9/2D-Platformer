@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -63,7 +64,12 @@ public abstract class Enemy : MonoBehaviour
         isHurting = true;
         health--;
 
-        // Destroy game obj
+        // Destroy game obj and load next level if main enemy is killed
+        if ((health <= 0) && gameObject.CompareTag("EnemyMain")){
+            Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
         if (health <= 0) {Destroy(gameObject);}
 
         StartCoroutine(HurtRoutine());

@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController: MonoBehaviour
 {
+    private AudioSource myAudioSource;
+    public AudioClip[] audioClips;
+    private int randomInt;
+    private AudioClip clip;
+    public AudioClip laserSound;
+
     // How fast to move and rotate
     public float speed = 0.1f;
     public float rotationSpeed = 2;
@@ -37,6 +44,7 @@ public class PlayerController: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myAudioSource = GetComponent<AudioSource>();
         health = 3;
 
         damageChild = new GameObject("Empty");
@@ -50,7 +58,14 @@ public class PlayerController: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Move
+        // Move and play background music
+        if (Input.anyKeyDown)
+        {
+            randomInt = Random.Range(0, audioClips.Length);
+            clip = audioClips[randomInt];
+            myAudioSource.PlayOneShot(clip);
+        }
+
         if (Input.GetKey (KeyCode.D) && transform.position.x < maxX)
         {
             transform.position += (Vector3.right * speed);
@@ -88,6 +103,7 @@ public class PlayerController: MonoBehaviour
 
     // Fire every amount of seconds, determined by fireRate
     IEnumerator Fire() {
+        AudioSource.PlayClipAtPoint(laserSound, transform.position);
         Instantiate(projectile, transform.position + (transform.up * 1.1f), transform.rotation);
         yield return new WaitForSeconds(fireRate);
         isFiring = false;
@@ -113,7 +129,10 @@ public class PlayerController: MonoBehaviour
         isHurting = true;
         health--;
 
-        if (health <= 0) {Destroy(gameObject);}
+        if (health <= 0) {
+            Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
 
         // Change ship sprite mask for damage
         switch (health)
