@@ -19,7 +19,7 @@ public class LoseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Intro");
     }
 
 }
