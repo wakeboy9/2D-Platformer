@@ -14,7 +14,7 @@ public class LoseMenu : MonoBehaviour
     public void RestartLevel()
     {
         //PlayerController.myActiveScene
-        SceneManager.LoadScene(LevelController.PrevScene);
+        SceneManager.LoadScene(LevelController.prevScene);
     }
 
     public void MainMenu()

@@ -66,8 +66,8 @@ public abstract class Enemy : MonoBehaviour
 
         // Destroy game obj and load next level if main enemy is killed
         if ((health <= 0) && gameObject.CompareTag("EnemyMain")){
+            SceneManager.LoadScene(LevelController.nextScene);
             Destroy(gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         if (health <= 0) {Destroy(gameObject);}

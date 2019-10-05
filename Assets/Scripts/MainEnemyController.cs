@@ -21,6 +21,8 @@ public class MainEnemyController : Enemy
         speed = 2f;
         health = 5;
 
+        invulnerable = true;
+
         // Get scene name to change main enemy activity
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
@@ -51,6 +53,9 @@ public class MainEnemyController : Enemy
         {
             Chase();
         }
+
+        // Check if other enemies are alive
+        setInvulnerable();
     }
 
     // Fire projectile at enemy every fireRate seconds
@@ -82,5 +87,12 @@ public class MainEnemyController : Enemy
     {
         //create a random direction vector with the magnitude of 1, 
         direction = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+    }
+
+    // Make main enemy invulnerable while other enemies exist
+    void setInvulnerable() {
+        if(GameObject.FindGameObjectWithTag("Enemy") == null) {
+            invulnerable = false;
+        }
     }
 }
