@@ -27,7 +27,6 @@ public class LevelController : MonoBehaviour
             currentScene = "Lose";
         } else if(SceneManager.GetActiveScene().name != currentScene && SceneManager.GetActiveScene().name != "Lose") {
             prevScene = currentScene;
-            Debug.Log(prevScene);
             currentScene = SceneManager.GetActiveScene().name;
             getNextScene();
         }

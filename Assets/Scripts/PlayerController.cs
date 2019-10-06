@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController: MonoBehaviour
 {
-    //public static int myActiveScene;
+    // Audio
     private AudioSource myAudioSource;
     public AudioClip[] audioClips;
     private int randomInt;
@@ -48,7 +48,8 @@ public class PlayerController: MonoBehaviour
         myAudioSource = GetComponent<AudioSource>();
         randomInt = Random.Range(0, audioClips.Length);
         clip = audioClips[randomInt];
-        myAudioSource.PlayOneShot(clip);
+        myAudioSource.clip = clip;
+        myAudioSource.Play();
 
         health = 3;
 

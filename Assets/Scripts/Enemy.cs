@@ -109,7 +109,7 @@ public abstract class Enemy : MonoBehaviour
     public void Chase()
     {
         minDistance = 1.7f;
-        if (Vector3.Distance(transform.position, target.position) >= minDistance)
+        if (Vector3.Distance(transform.position, target.position) >= minDistance && target != null)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
