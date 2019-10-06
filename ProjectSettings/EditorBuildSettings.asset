@@ -39,12 +39,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level9.unity
     guid: 5abc4e5c0b3a049dda5258736c6c7be8
   - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: 3816ea98b2efb47b19d96eeb64b37e13
+  - enabled: 1
     path: Assets/Scenes/Lose.unity
     guid: 529da0b0f0bd0492195563eaf753dcc1
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 80ee79f7fdd1043a29a20e9cd6d29d99
-  - enabled: 1
-    path: Assets/Scenes/Win.unity
-    guid: 3ba5b31c54b0f435e86da8f55480f732
   m_configObjects: {}
