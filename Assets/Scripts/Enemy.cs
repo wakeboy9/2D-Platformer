@@ -65,7 +65,16 @@ public abstract class Enemy : MonoBehaviour
         health--;
 
         // Destroy game obj and load next level if main enemy is killed
-        if ((health <= 0) && gameObject.CompareTag("EnemyMain")){
+        //load win screen if it's the last level (level 9)
+
+        if ((health <= 0) && gameObject.CompareTag("EnemyMain")
+            && (SceneManager.GetActiveScene().name == "Level9"))
+        {
+            SceneManager.LoadScene("Win");
+            Destroy(gameObject);
+        }
+
+        else if ((health <= 0) && gameObject.CompareTag("EnemyMain")){
             SceneManager.LoadScene(LevelController.nextScene);
             Destroy(gameObject);
         }
